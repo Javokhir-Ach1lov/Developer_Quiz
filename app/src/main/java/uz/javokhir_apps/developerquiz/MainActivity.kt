@@ -25,7 +25,12 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter=adapter
     }
     private fun getDataFromFirebase(){
-        quizModelList.add(QuizModel("1","Android","All the basic programming","15"))
+
+        val listQuestionModel= mutableListOf<QuestionModel>()
+        listQuestionModel.add(QuestionModel("fdfsdfgf", mutableListOf("dd","dd","dddd","ddd"),"dd"))
+        listQuestionModel.add(QuestionModel("dfg", mutableListOf("dd","dd","dddd","ddd"),"dd"))
+
+        quizModelList.add(QuizModel("1","Android","All the basic programming","15",listQuestionModel))
         setupRecyclerView()
     }
 }
