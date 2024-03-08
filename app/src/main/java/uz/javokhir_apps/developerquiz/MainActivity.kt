@@ -2,7 +2,10 @@ package uz.javokhir_apps.developerquiz
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.getValue
 import uz.javokhir_apps.developerquiz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,17 +23,25 @@ class MainActivity : AppCompatActivity() {
         getDataFromFirebase()
     }
     private fun setupRecyclerView(){
+        binding.progressBar.visibility=View.GONE
         adapter= QuizListAdapter(quizModelList)
         binding.recyclerView.layoutManager= LinearLayoutManager(this)
         binding.recyclerView.adapter=adapter
     }
-    private fun getDataFromFirebase(){
-
-        val listQuestionModel= mutableListOf<QuestionModel>()
-        listQuestionModel.add(QuestionModel("fdfsdfgf", mutableListOf("dd","dd","dddd","ddd"),"dd"))
-        listQuestionModel.add(QuestionModel("dfg", mutableListOf("dd","dd","dddd","ddd"),"dd"))
-
-        quizModelList.add(QuizModel("1","Android","All the basic programming","15",listQuestionModel))
-        setupRecyclerView()
+    private fun getDataFromFirebase() {
+        binding.progressBar.visibility = View.VISIBLE
+        FirebaseDatabase.getInstance().reference
+            .get()
+            .addOnSuccessListener { dataSnapshot ->
+                if (dataSnapshot.exists()) {
+                    for (snapshot in dataSnapshot.children) {
+                        val quizModel = snapshot.getValue(QuizModel::class.java)
+                        if (quizModel != null) {
+                            quizModelList.add(quizModel)
+                        }
+                    }
+                }
+                setupRecyclerView()
+            }
     }
 }

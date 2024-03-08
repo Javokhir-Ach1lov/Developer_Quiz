@@ -25,22 +25,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quizzy App"
+            android:text="Developer Quz"
             android:gravity="center"
             android:textSize="34sp"
             android:letterSpacing="0.1"
             android:textColor="@color/white"
-            android:textStyle="bold"/>
+            android:textStyle="italic"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lets play this awesome quiz app to enhance your knowledge"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:layout_margin="16dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
+            android:textColor="@color/orange"
+            android:textStyle="italic"/>
 
 
     </LinearLayout>
